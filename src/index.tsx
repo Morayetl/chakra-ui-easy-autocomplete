@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Input, ChakraProvider, InputProps, Flex, FlexProps, SimpleGrid, Box, BoxProps, InputGroup, InputLeftElement, InputRightElement, InputLeftAddon, InputRightAddon } from '@chakra-ui/react'
+import mergeRefs from "react-merge-refs";
 //import styles from './styles.module.css'
 
 export type ChakraUIEasyAutoCompleteSuggestionItemProps = {
@@ -81,6 +82,7 @@ export const ChakraUIEasyAutoComplete = React.forwardRef<HTMLInputElement, Chakr
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [input, setInput] = React.useState("");
   const [itemFocused, setItemFocused] = useState(false);
+  const inputRef = useRef<HTMLInputElement>();
 
   /**
    * Sets all the suggestions when input is empty
@@ -227,12 +229,31 @@ export const ChakraUIEasyAutoComplete = React.forwardRef<HTMLInputElement, Chakr
     }
   }
 
+  const onDragLeave = (e: any) => {
+    setShowSuggestions(false);
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (props.onDragLeave) {
+      props.onDragLeave(e);
+    }
+  }
+
+  const focusInput = () => {
+    if (inputRef && inputRef.current) {
+      inputRef.current.focus()
+    }
+  }
+
   const onItemMouseEnter = () => {
     setItemFocused(true);
   }
 
   const onItemMouseLeave = () => {
     setItemFocused(false);
+    if (showSuggestions) {
+      focusInput();
+    }
   }
 
   const SuggestionsListComponent = () => {
@@ -245,7 +266,9 @@ export const ChakraUIEasyAutoComplete = React.forwardRef<HTMLInputElement, Chakr
             const eventProps = {
               onMouseLeave: onItemMouseLeave,
               onMouseEnter: onItemMouseEnter,
-              onClick: () => onItemClick(index)
+              onClick: () => onItemClick(index),
+              onDragLeave: onDragLeave,
+              onBlur: focusInput
             }
 
             const boxProps = props.itemProps ? props.itemProps(isActive) : {};
@@ -256,10 +279,12 @@ export const ChakraUIEasyAutoComplete = React.forwardRef<HTMLInputElement, Chakr
                 p={2}
                 _hover={{ background: "blue.400", color: "black" }}
                 bg={isActive ? 'blue.300' : 'transparent'}
+                userSelect="none"
                 {...boxProps}
                 {...eventProps}
                 tabIndex={0}
                 key={index}
+
               >
                 {suggestion.label}
               </Box>
@@ -302,7 +327,7 @@ export const ChakraUIEasyAutoComplete = React.forwardRef<HTMLInputElement, Chakr
             onBlur={onBlur}
             onChange={onChange}
             onClick={onClick}
-            ref={ref}
+            ref={mergeRefs([ref, inputRef])}
           />
 
           {

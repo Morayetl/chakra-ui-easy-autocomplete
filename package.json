@@ -1,6 +1,6 @@
 {
   "name": "chakra-ui-easy-autocomplete",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Autocomplete with chakra-ui component",
   "author": "Morayetl",
   "license": "MIT",
@@ -66,6 +66,7 @@
     "@emotion/styled": "^11.6.0",
     "@types/react-test-renderer": "^17.0.1",
     "framer-motion": "^4.1.17",
+    "react-merge-refs": "^1.1.0",
     "react-test-renderer": "^17.0.2"
   }
 }

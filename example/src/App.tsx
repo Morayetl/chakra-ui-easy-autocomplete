@@ -1,6 +1,5 @@
 import React from 'react'
 import { ChakraUIEasyAutoComplete, ChakraUIEasyAutoCompleteSuggestionItemProps } from 'chakra-ui-easy-autocomplete'
-import 'chakra-ui-easy-autocomplete/dist/index.css'
 import { Box, Text, Button } from '@chakra-ui/react';
 
 const suggestions: Array<ChakraUIEasyAutoCompleteSuggestionItemProps> = [
@@ -50,7 +49,6 @@ const App = () => {
     <ChakraUIEasyAutoComplete
       inputLeftAddon={
         <Box
-          pointerEvents='none'
           color='gray.300'
         >$</Box>
       }
