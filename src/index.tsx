@@ -34,6 +34,8 @@ export type ChakraUIEasyAutoCompleteProps = {
       onMouseLeave: () => void;
       onMouseEnter: () => void;
       onClick: () => void;
+      onDragLeave: (e:any) => void;
+      onBlur:() => void;
     },
     data: ChakraUIEasyAutoCompleteSuggestionItemProps,
     isActive: boolean,
