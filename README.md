@@ -4,6 +4,14 @@
 
 [![NPM](https://img.shields.io/npm/v/chakra-ui-easy-autocomplete.svg)](https://www.npmjs.com/package/chakra-ui-easy-autocomplete) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+#### Easy autocomplete for chakra ui
+
+![alt text](./public/img.png)
+
+![alt text](./public/img2.png)
+
+![alt text](./public/img3.png)
+
 ## Install
 
 ```bash
@@ -38,6 +46,7 @@ const App = () => {
       w="200px"
       suggestions={suggestions}
       onChange={(e: any) => console.log(e.target.value)}
+      onSelect={(e: any) => console.log(e.target.value)}
       resultNotFoundElement={<Text p={3}>Result not found</Text>}
     />
 
@@ -58,6 +67,7 @@ const App = () => {
       w="200px"
       suggestions={suggestions}
       onChange={(e: any) => console.log(e.target.value)}
+      onSelect={(e: any) => console.log(e.target.value)}
       resultNotFoundElement={<Text>Result not found</Text>}
     />
 
@@ -78,6 +88,7 @@ const App = () => {
       w="400px"
       suggestions={suggestions}
       onChange={(e: any) => console.log(e.target.value)}
+      onSelect={(e: any) => console.log(e.target.value)}
       resultNotFoundElement={<Text>Result not found</Text>}
     />
     <ChakraUIEasyAutoComplete
@@ -95,11 +106,13 @@ const App = () => {
       }}
       resultNotFoundProps={{ fontSize: 'xl' }}
       onChange={(e: any) => console.log(e.target.value)}
+      onSelect={(e: any) => console.log(e.target.value)}
     />
     <ChakraUIEasyAutoComplete
       w="300px"
       suggestions={suggestions}
       onChange={(e: any) => console.log(e.target.value)}
+      onSelect={(e: any) => console.log(e.target.value)}
       item={(props, data, isActive, index) => <Box {...props} key={index} _hover={{ bg: 'grey' }} h="50px" bg={isActive ? "green" : "yellow"}>{data.label}</Box>}
     />
 
@@ -107,7 +120,6 @@ const App = () => {
 }
 
 export default App
-
 
 ```
 

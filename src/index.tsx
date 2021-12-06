@@ -19,7 +19,7 @@ export type ChakraUIEasyAutoCompleteProps = {
   /**
    * Suggestions
    */
-  suggestions: Array<ChakraUIEasyAutoCompleteSuggestionItemProps>;
+  suggestions: Array<ChakraUIEasyAutoCompleteSuggestionItemProps> | undefined;
 
   /**
    * Properties to pass for items
@@ -78,20 +78,21 @@ export type ChakraUIEasyAutoCompleteProps = {
   inputRightAddon?: JSX.Element;
 
 } & InputProps & FlexProps;
-export const ChakraUIEasyAutoComplete = React.forwardRef<HTMLInputElement, ChakraUIEasyAutoCompleteProps>((props, ref) => {
-  const [filteredSuggestions, setFilteredSuggestions] = useState<typeof props.suggestions>([]);
+
+export const ChakraUIEasyAutoComplete = React.forwardRef<HTMLElement, ChakraUIEasyAutoCompleteProps>((props, ref) => {
+  const [filteredSuggestions, setFilteredSuggestions] = useState<Array<ChakraUIEasyAutoCompleteSuggestionItemProps>>([]);
   const [activeSuggestionIndex, setActiveSuggestionIndex] = React.useState(0);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [input, setInput] = React.useState("");
   const [itemFocused, setItemFocused] = useState(false);
-  const inputRef = useRef<HTMLInputElement>();
+  const inputRef = useRef<HTMLElement>();
 
   /**
    * Sets all the suggestions when input is empty
    */
   useEffect(() => {
     if (filteredSuggestions.length === 0 && !input) {
-      setFilteredSuggestions(props.suggestions)
+      setFilteredSuggestions(props.suggestions || [])
     }
   }, [props.suggestions]);
 
@@ -177,9 +178,9 @@ export const ChakraUIEasyAutoComplete = React.forwardRef<HTMLInputElement, Chakr
     setShowSuggestions(false);
     setItemFocused(false);
 
-    if (props.onChange) {
+    if (props.onSelect) {
       const event = createEvent(filteredSuggestions[index].value);
-      props.onChange(event)
+      props.onSelect(event)
     }
   };
 
