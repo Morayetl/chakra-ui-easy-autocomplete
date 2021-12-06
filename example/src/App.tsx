@@ -21,7 +21,7 @@ const App = () => {
     <ChakraUIEasyAutoComplete
       size="sm"
       w="200px"
-      suggestions={suggestions}
+      suggestions={[]}
       onChange={(e: any) => console.log(e.target.value)}
       onSelect={(e: any) => console.log(e.target.value)}
       resultNotFoundElement={<Text p={3}>Result not found</Text>}

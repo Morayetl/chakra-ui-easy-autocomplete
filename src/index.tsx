@@ -165,8 +165,8 @@ export const ChakraUIEasyAutoComplete = React.forwardRef<HTMLElement, ChakraUIEa
     setShowSuggestions(true);
     e.stopPropagation();
 
-    if (props.onChange && unLinked.length === 0) {
-      const event = createEvent(null);
+    if (props.onChange) {
+      const event = createEvent(userInput);
       props.onChange(event)
     }
   };
@@ -333,6 +333,7 @@ export const ChakraUIEasyAutoComplete = React.forwardRef<HTMLElement, ChakraUIEa
             value={input}
             onBlur={onBlur}
             onChange={onChange}
+            onSelect={(e:any) => e.stopPropagation()}
             onClick={onClick}
             ref={mergeRefs([ref, inputRef])}
           />
