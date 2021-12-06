@@ -195,6 +195,10 @@ export const ChakraUIEasyAutoComplete = React.forwardRef<HTMLElement, ChakraUIEa
     const enter = 'Enter';
     const escape = 'Escape';
 
+    if(filteredSuggestions.length === 0){
+      return;
+    }
+
     if (keyCode === escape) {
       setShowSuggestions(false);
     }
