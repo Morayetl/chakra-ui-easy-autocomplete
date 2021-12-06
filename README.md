@@ -46,7 +46,7 @@ const App = () => {
       w="200px"
       suggestions={suggestions}
       onChange={(e: any) => console.log(e.target.value)}
-      onSelect={(e: any) => console.log(e.target.value)}
+      onSelect={(data: any) => console.log(data)}
       resultNotFoundElement={<Text p={3}>Result not found</Text>}
     />
 
@@ -67,7 +67,7 @@ const App = () => {
       w="200px"
       suggestions={suggestions}
       onChange={(e: any) => console.log(e.target.value)}
-      onSelect={(e: any) => console.log(e.target.value)}
+      onSelect={(data: any) => console.log(data)}
       resultNotFoundElement={<Text>Result not found</Text>}
     />
 
@@ -88,7 +88,7 @@ const App = () => {
       w="400px"
       suggestions={suggestions}
       onChange={(e: any) => console.log(e.target.value)}
-      onSelect={(e: any) => console.log(e.target.value)}
+      onSelect={(data: any) => console.log(data)}
       resultNotFoundElement={<Text>Result not found</Text>}
     />
     <ChakraUIEasyAutoComplete
@@ -106,13 +106,13 @@ const App = () => {
       }}
       resultNotFoundProps={{ fontSize: 'xl' }}
       onChange={(e: any) => console.log(e.target.value)}
-      onSelect={(e: any) => console.log(e.target.value)}
+      onSelect={(data: any) => console.log(data)}
     />
     <ChakraUIEasyAutoComplete
       w="300px"
       suggestions={suggestions}
       onChange={(e: any) => console.log(e.target.value)}
-      onSelect={(e: any) => console.log(e.target.value)}
+      onSelect={(data: any) => console.log(data)}
       item={(props, data, isActive, index) => <Box {...props} key={index} _hover={{ bg: 'grey' }} h="50px" bg={isActive ? "green" : "yellow"}>{data.label}</Box>}
     />
 

@@ -13,7 +13,12 @@ export type ChakraUIEasyAutoCompleteSuggestionItemProps = {
    * Value for suggestion
    */
   value: any;
-} & InputProps & FlexProps;
+
+  /**
+   * Optional key
+   */
+  key?: string;
+};
 
 export type ChakraUIEasyAutoCompleteProps = {
   /**
@@ -77,6 +82,7 @@ export type ChakraUIEasyAutoCompleteProps = {
    */
   inputRightAddon?: JSX.Element;
 
+  onSelect: (data:ChakraUIEasyAutoCompleteSuggestionItemProps) => void
 } & InputProps & FlexProps;
 
 export const ChakraUIEasyAutoComplete = React.forwardRef<HTMLElement, ChakraUIEasyAutoCompleteProps>((props, ref) => {
@@ -179,8 +185,7 @@ export const ChakraUIEasyAutoComplete = React.forwardRef<HTMLElement, ChakraUIEa
     setItemFocused(false);
 
     if (props.onSelect) {
-      const event = createEvent(filteredSuggestions[index].value);
-      props.onSelect(event)
+      props.onSelect(filteredSuggestions[index])
     }
   };
 
