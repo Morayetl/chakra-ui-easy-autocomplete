@@ -39,8 +39,8 @@ export type ChakraUIEasyAutoCompleteProps = {
       onMouseLeave: () => void;
       onMouseEnter: () => void;
       onClick: () => void;
-      onDragLeave: (e:any) => void;
-      onBlur:() => void;
+      onDragLeave: (e: any) => void;
+      onBlur: () => void;
     },
     data: ChakraUIEasyAutoCompleteSuggestionItemProps,
     isActive: boolean,
@@ -82,7 +82,7 @@ export type ChakraUIEasyAutoCompleteProps = {
    */
   inputRightAddon?: JSX.Element;
 
-  onSelect: (data:ChakraUIEasyAutoCompleteSuggestionItemProps) => void
+  onSelect: (data: ChakraUIEasyAutoCompleteSuggestionItemProps) => void
 } & InputProps & FlexProps;
 
 export const ChakraUIEasyAutoComplete = React.forwardRef<HTMLElement, ChakraUIEasyAutoCompleteProps>((props, ref) => {
@@ -94,11 +94,20 @@ export const ChakraUIEasyAutoComplete = React.forwardRef<HTMLElement, ChakraUIEa
   const inputRef = useRef<HTMLElement>();
 
   /**
-   * Sets all the suggestions when input is empty
+   * Sets all the suggestions when input is empty or when suggestion is updated it filters the results
    */
   useEffect(() => {
     if (filteredSuggestions.length === 0 && !input) {
       setFilteredSuggestions(props.suggestions || [])
+    }
+
+    if (props.suggestions && input) {
+      // Filter our suggestions that don't contain the user's input
+      const unLinked = props.suggestions ? props.suggestions.filter(
+        (suggestion) =>
+          suggestion.label.toLowerCase().indexOf(input.toLowerCase()) > -1
+      ) : [];
+      setFilteredSuggestions(unLinked);
     }
   }, [props.suggestions]);
 
@@ -200,7 +209,7 @@ export const ChakraUIEasyAutoComplete = React.forwardRef<HTMLElement, ChakraUIEa
     const enter = 'Enter';
     const escape = 'Escape';
 
-    if(filteredSuggestions.length === 0){
+    if (filteredSuggestions.length === 0) {
       return;
     }
 
@@ -338,7 +347,7 @@ export const ChakraUIEasyAutoComplete = React.forwardRef<HTMLElement, ChakraUIEa
             value={input}
             onBlur={onBlur}
             onChange={onChange}
-            onSelect={(e:any) => e.stopPropagation()}
+            onSelect={(e: any) => e.stopPropagation()}
             onClick={onClick}
             ref={mergeRefs([ref, inputRef])}
           />
